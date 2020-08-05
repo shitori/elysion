@@ -21,7 +21,7 @@ router.get('/creategame', function (req, res, next) {
 
 router.post('/creategame', function (req, res, next) {
     console.log(req.body)
-    var player = []
+    var joueur = []
     var nom = ""
     for (data in req.body) {
 
@@ -31,10 +31,10 @@ router.post('/creategame', function (req, res, next) {
         if (data == "nom") {
             nom = req.body[data]
         } else {
-            player.push(req.body[data])
+            joueur.push(req.body[data])
         }
     }
-    models.create_game(function (status) {
+    models.create_game(joueur, nom, function (status) {
         console.log(status)
         res.redirect("/")
     })
