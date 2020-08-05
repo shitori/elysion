@@ -7,13 +7,27 @@
         <div class="form-row name mb-1">
             <label for="" class=" form-control-lg col-sm-2 col-form-label">Nom de la partie</label>
             <div class="col-8">
-                <input type="password" class="form-control form-control-lg " name="nom" placeholder="" required>
+                <input type="password" class="form-control form-control-lg " id="typepass" name="nom" placeholder=""
+                       required>
             </div>
-            <div class="col-2">
-                    <input type="checkbox" onclick="show()" class="form-control form-control-lg">
+            <div class="col-2 ">
+
             </div>
         </div>
-        <div class="form-row joueur mb-1">
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+            <div class="col-8">
+                <input type="checkbox" onclick="Toggle()">
+                <b>Show Password</b>
+            </div>
+            <div class="col-2 ">
+
+            </div>
+
+        </div>
+        <div class="form-row joueur mb-1 mt-2">
             <label for="" class=" form-control-lg col-sm-2 col-form-label">Joueur n°1</label>
             <div class="col-8">
                 <input type="text" class="form-control form-control-lg " name="j1" placeholder="Nom du joueur" required>

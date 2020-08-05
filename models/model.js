@@ -8,6 +8,13 @@ class Model {
             cb(rows)
         })
     }
+
+    static create_game(player,name,cb){
+        connection.query("insert into game values (default, name , default )", (err)=>{
+            if (err) throw err
+            cb("ok")
+        })
+    }
 }
 
 module.exports = Model

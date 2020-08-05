@@ -10,16 +10,13 @@ $(".ajouter").on("click", function () {
     console.log("joueur ajouté");
 });
 
-function show() {
 
-    var x = document.getElementsByName("nom");
-
-    console.log(x)
-    if (x.type === "password") {
-        console.log("1")
-        x.type = "text";
-    } else {
-        console.log("2")
-        x.type = "password";
+function Toggle() {
+    var temp = document.getElementById("typepass");
+    if (temp.type === "password") {
+        temp.type = "text";
+    }
+    else {
+        temp.type = "password";
     }
 }
