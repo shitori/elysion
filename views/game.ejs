@@ -1,0 +1,47 @@
+<% include header %>
+<body>
+<h1 class="text-center mb-5 mt-5 "><%= title %></h1>
+
+<form action="/game" method="post">
+
+        <div class="form-row name mb-1">
+            <label for="" class=" form-control-lg col-sm-2 col-form-label">Nom de la partie</label>
+            <div class="col-8">
+                <input type="password" class="form-control form-control-lg " id="typepass" name="nom" placeholder=""
+                       required>
+            </div>
+            <div class="col-2 ">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+            <div class="col-8">
+                <input type="checkbox" onclick="Toggle()">
+                <b>Show Password</b>
+            </div>
+            <div class="col-2 ">
+
+            </div>
+
+        </div>
+
+
+    <div class="row mt-2">
+        <div class="col-2">
+
+        </div>
+        <div class="col-8">
+            <input type="submit" class="form-control form-control-lg btn btn-outline-success valider" value="Rejoindre">
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
+</form>
+
+</body>
+
+<% include footer %>
