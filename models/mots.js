@@ -55,13 +55,4 @@ let mots = ["bleu", "super", "autre", "bizarre", "difficile", "drôle", "étrang
     "traverser", "tromper", "trouver", "tuer", "utiliser", "valoir", "vendre", "venir", "vivre", "voir", "voler",
     "vouloir"]
 
-
-class Model {
-
-    static getMot(cb) {
-        var r = Math.floor(Math.random() * mots.length);
-        cb(mots[r])
-    }
-}
-
-module.exports = Model
+module.exports = mots

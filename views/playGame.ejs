@@ -1,1 +1,22 @@
-<p>salut on est ds la game, le mot a trouver est <%= mot %> </p>
+<% include header %>
+
+<p>salut on est ds la game, le mot a trouver est <%= mot %> il reste <span id="timer"> </span> sec</p>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+<script>
+    var s = 10;
+
+    $(function() {
+        function timer(){
+            s = s-1
+            $("#timer").text(s);
+        }
+        setInterval(timer,1000);
+    });
+    setTimeout(function(){
+        console.log("reload")
+        window.location.reload(1);
+    }, 10000);
+</script>
+
+<% include footer %>

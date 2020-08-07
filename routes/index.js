@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models/model')
-var models_mots = require('../models/model_mots')
 
 
 router.get('/', function (req, res, next) {
@@ -14,8 +13,8 @@ router.get('/game', function (req, res, next) {
 
 router.get('/game/:id', function (req, res, next) {
     if (req.session.nom == req.params.id) {
-        models_mots.getMot(function (mot){
-            res.render('playGame', {title: 'Rejoindre une partie', mot : mot});
+        models.getMot(req.session.nom, function (mot) {
+            res.render('playGame', {title: 'Jouer la partie', mot: mot});
         })
     } else {
         res.redirect("/game")
@@ -23,6 +22,16 @@ router.get('/game/:id', function (req, res, next) {
 
 });
 
+router.get('/game/:id/show', function (req, res, next) {
+    models.getGame(req.params.id, function (word) {
+        if (word == -1) {
+            res.redirect("/game")
+        } else {
+            res.render('showGame', {title: 'Voir la partie', mot: word});
+        }
+    })
+
+});
 router.post('/game', function (req, res, next) {
     models.join_game(req.body.nom, function (id) {
         console.log(id)

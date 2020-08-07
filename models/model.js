@@ -1,5 +1,6 @@
 let connection = require('../bin/bdd');
 
+let mots = require('../models/mots');
 
 class Model {
     static test(cb) {
@@ -19,7 +20,7 @@ class Model {
                     cb("ko")
                 } else {
                     var r = Math.floor(Math.random() * 1000000) + 1;
-                    connection.query("insert into game values (?, ? , default )", [r, name], (err) => {
+                    connection.query("insert into game values (?, ? , default,default )", [r, name], (err) => {
                         if (err) throw err
                         var sql = "insert into player values "
                         for (var i = 0; i < players.length; i++) {
@@ -42,8 +43,6 @@ class Model {
                 }
             })
         }
-
-
     }
 
     static join_game(name, cb) {
@@ -54,6 +53,24 @@ class Model {
             } else {
                 cb(undefined)
             }
+        })
+    }
+
+    static getMot(id, cb) {
+        var r = Math.floor(Math.random() * mots.length);
+        connection.query("update game set actualword = ? where id = ?", [mots[r], id], (err) => {
+            if (err) throw err
+            cb(mots[r])
+        })
+    }
+
+    static getGame(id, cb) {
+        connection.query("select * from game where id = ? ", [id], (err, row) => {
+            if (err) throw err
+            if (row.length == 0){
+               cb(-1)
+            }
+            cb(row[0]["actualword"])
         })
     }
 }
