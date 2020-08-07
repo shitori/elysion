@@ -12,7 +12,7 @@ router.get('/game', function (req, res, next) {
 
 router.get('/game/:id', function (req, res, next) {
     if (req.session.nom == req.params.id) {
-        res.render('playGame', {title: 'Rejoindre une partie'});
+        res.render('playGame', {title: 'Rejoindre une partie', name: req.session.nom});
     } else {
         res.redirect("/game")
     }
@@ -20,10 +20,11 @@ router.get('/game/:id', function (req, res, next) {
 });
 
 router.post('/game', function (req, res, next) {
-    models.join_game(req.body.name, function (id) {
+    models.join_game(req.body.nom, function (id) {
+        console.log(id)
         if (id != undefined) {
             req.session.nom = id
-            res.redirect("/game/" + status)
+            res.redirect("/game/" + id)
         } else {
             res.redirect("/game")
         }
@@ -36,7 +37,6 @@ router.get('/creategame', function (req, res, next) {
 });
 
 router.post('/creategame', function (req, res, next) {
-    console.log(req.body)
     var joueur = []
     var nom = ""
     for (data in req.body) {

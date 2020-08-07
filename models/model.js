@@ -47,7 +47,6 @@ class Model {
     }
 
     static join_game(name, cb) {
-        console.log(name)
         connection.query("select * from game where name = ? ", [name], (err, row) => {
             if (err) throw err
             if (row.length > 0) {
