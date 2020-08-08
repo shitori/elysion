@@ -13,8 +13,19 @@ router.get('/game', function (req, res, next) {
 
 router.get('/game/:id', function (req, res, next) {
     if (req.session.nom == req.params.id) {
-        models.getMot(req.session.nom, function (mot) {
-            res.render('playGame', {title: 'Jouer la partie', mot: mot});
+        models.setGame(req.session.nom, function (mot, j1, j2) {
+            models.getGame(req.session.nom, function (game, players) {
+                var p1, p2;
+                for (var i = 0; i < players.length; i++) {
+                    if (j1 == players[i]["id"]) {
+                        p1 = players[i]["name"]
+                    }
+                    if (j2 == players[i]["id"]) {
+                        p2 = players[i]["name"]
+                    }
+                }
+                res.render('playGame', {title: 'Jouer la partie', mot: mot, j1: p1, j2: p2});
+            })
         })
     } else {
         res.redirect("/game")
@@ -23,11 +34,11 @@ router.get('/game/:id', function (req, res, next) {
 });
 
 router.get('/game/:id/show', function (req, res, next) {
-    models.getGame(req.params.id, function (word) {
-        if (word == -1) {
+    models.getGame(req.params.id, function (game, players) {
+        if (game == -1) {
             res.redirect("/game")
         } else {
-            res.render('showGame', {title: 'Voir la partie', mot: word});
+            res.render('showGame', {title: 'Voir la partie', mot: game["actualword"]});
         }
     })
 

@@ -1,4 +1,4 @@
-var timer = 10
+var timer = 90
 var s = timer;
 $("#timer").text(s);
 
