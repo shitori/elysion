@@ -4,5 +4,20 @@
     <%= j1 %> doit faire deviner le mot "<%= mot %>" à
     <%= j2 %> il reste <span id="timer"></span> sec</p>
 
+<ul>
+    <% for (var i = 0;i < players.length;i++){ %>
+        <li> <%= players[i]["name"] %> : <%= players[i]["score"] %> </li>
+    <% } %>
+</ul>
+
+<form action="/game/<%= game["id"] %>" method="get">
+    <button id="rater" type="button">Rater - <span id="essai"></span> essaie(s) restant(s)</button>
+</form>
+<form action="/game/<%= game["id"] %>" method="post">
+    <button name="sucess" type="submit">Valider</button>
+</form>
+<form action="/game/<%= game["id"] %>" method="post">
+    <button name="finish" type="submit">Fin de partie</button>
+</form>
 
 <% include footer_timer.ejs %>

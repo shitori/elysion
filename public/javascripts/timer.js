@@ -1,15 +1,26 @@
 var timer = 90
 var s = timer;
-$("#timer").text(s);
+var rater = 3;
 
-$(function() {
-    function timer(){
-        s = s-1
+$("#timer").text(s);
+$("#essai").text(rater);
+
+$(function () {
+    function timer() {
+        s--;
         $("#timer").text(s);
     }
-    setInterval(timer,1000);
+
+    setInterval(timer, 1000);
 });
-setTimeout(function(){
-    console.log("reload")
+setTimeout(function () {
     window.location.reload(1);
 }, timer * 1000);
+
+$("#rater").click(function () {
+    rater--;
+    if (rater <= 0) {
+        window.location.reload(1);
+    }
+    $("#essai").text(rater);
+});

@@ -83,12 +83,35 @@ class Model {
             if (row.length == 0) {
                 cb(-1)
             } else {
-                connection.query("select * from player where id_game = ?", [id], (err, rows) => {
+                connection.query("select * from player where id_game = ? order by score desc ", [id], (err, rows) => {
                     if (err) throw err
                     cb(row[0], rows)
                 })
 
             }
+        })
+    }
+
+    static addScore(id, cb) {
+        connection.query("select * from game where id = ?", [id], (err, row) => {
+            if (err) throw err
+            if (row.length == 0) {
+                cb("ko")
+            } else {
+                var j1 = row[0]["p1"]
+                var j2 = row[0]["p2"]
+                connection.query("update player set score = score + 1 where id = ? or id = ? ", [j1, j2], (err) => {
+                    if (err) throw err
+                    cb("ok")
+                })
+            }
+        })
+    }
+
+    static endGame(id,cb){
+        connection.query("update game set isOver = 1 where id = ?",[id],(err)=>{
+            if (err) throw err
+            cb("ok")
         })
     }
 }
