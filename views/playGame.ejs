@@ -1,4 +1,5 @@
 <% include header %>
+<input type="hidden" id="id_game" value="<%= game["id"] %>">
 
 <p>salut on est ds la game,
     <%= j1 %> doit faire deviner le mot "<%= mot %>" à
@@ -10,11 +11,33 @@
     <% } %>
 </ul>
 
-<form action="/game/<%= game["id"] %>" method="get">
-    <button id="rater" type="button">Rater - <span id="essai"></span> essaie(s) restant(s)</button>
+<ul>
+    <% for (var i = 0;i < history.length;i++){ %>
+        <% for (var j = 0; j < players.length; j++) {
+            if (history[i]["p1"] == players[j]["id"]) {
+                history[i]["j1"] = players[j]["name"]
+            }
+            if (history[i]["p2"] == players[j]["id"]) {
+                history[i]["j2"] = players[j]["name"]
+            }
+        } %>
+        <% if (history[i]["success"] == 1){ %>
+            <li> <%= history[i]["j1"] %> a reussi a faire deviner le mot <%= history[i]["actualword"] %>
+                à <%= history[i]["j2"] %></li>
+        <% } else{ %>
+            <li> <%= history[i]["j1"] %> n'a pas reussi a faire deviner le mot <%= history[i]["actualword"] %>
+                à <%= history[i]["j2"] %></li>
+
+        <% } %>
+    <% } %>
+</ul>
+
+
+<form action="/game/<%= game["id"] %>" method="post">
+    <button id="rater" name="fail" type="button">Rater - <span id="essai"></span> essaie(s) restant(s)</button>
 </form>
 <form action="/game/<%= game["id"] %>" method="post">
-    <button name="sucess" type="submit">Valider</button>
+    <button name="success" type="submit">Valider</button>
 </form>
 <form action="/game/<%= game["id"] %>" method="post">
     <button name="finish" type="submit">Fin de partie</button>

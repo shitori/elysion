@@ -14,7 +14,7 @@ router.get('/game', function (req, res, next) {
 router.get('/game/:id', function (req, res, next) {
     if (req.session.nom == req.params.id) {
         models.setGame(req.session.nom, function (mot, j1, j2) {
-            models.getGame(req.session.nom, function (game, players) {
+            models.getGame(req.session.nom, function (game, players, history) {
                 if (game["isOver"] == 1) {
                     res.redirect("/game/" + req.params.id + "/finish")
                 } else {
@@ -33,7 +33,8 @@ router.get('/game/:id', function (req, res, next) {
                         j1: p1,
                         j2: p2,
                         players: players,
-                        game: game
+                        game: game,
+                        history: history
                     });
                 }
             })
@@ -45,9 +46,16 @@ router.get('/game/:id', function (req, res, next) {
 
 router.post('/game/:id', function (req, res, next) {
     if (req.body.finish == undefined) {
-        models.addScore(req.params.id, function (status) {
-            res.redirect("/game/" + req.params.id)
-        })
+        if (req.body.success == undefined) {
+            console.log("loose")
+            models.addLoose(req.params.id, function (status) {
+                res.redirect("/game/" + req.params.id)
+            })
+        } else {
+            models.addScore(req.params.id, function (status) {
+                res.redirect("/game/" + req.params.id)
+            })
+        }
     } else {
         models.endGame(req.params.id, function (status) {
             res.redirect("/game/" + req.params.id)
@@ -58,7 +66,7 @@ router.post('/game/:id', function (req, res, next) {
 });
 
 router.get('/game/:id/show', function (req, res, next) {
-    models.getGame(req.params.id, function (game, players) {
+    models.getGame(req.params.id, function (game, players, history) {
         if (game == -1) {
             res.redirect("/game")
         } else if (game["isOver"] == 1) {
@@ -79,7 +87,8 @@ router.get('/game/:id/show', function (req, res, next) {
                 j1: p1,
                 j2: p2,
                 players: players,
-                game: game
+                game: game,
+                history: history
             });
 
         }
@@ -99,7 +108,7 @@ router.post('/game', function (req, res, next) {
 });
 
 router.get('/game/:id/finish', function (req, res, next) {
-    models.getGame(req.params.id, function (game, players) {
+    models.getGame(req.params.id, function (game, players, history) {
         if (game == -1) {
             res.redirect("/game")
         } else if (game["isOver"] == 0) {
@@ -108,7 +117,8 @@ router.get('/game/:id/finish', function (req, res, next) {
             res.render('finishGame', {
                 title: 'Partie Fini',
                 players: players,
-                game: game
+                game: game,
+                history: history
             });
 
         }
@@ -116,15 +126,14 @@ router.get('/game/:id/finish', function (req, res, next) {
 });
 
 router.get('/game/:id/data', function (req, res, next) {
-    models.getGame(req.params.id, function (game, players) {
+    models.getGame(req.params.id, function (game, players, history) {
         if (game == -1) {
             res.redirect("/game")
         } else {
-            res.json({game: game, players: players});
+            res.json({game: game, players: players, history: history});
         }
     })
 });
-
 
 
 router.get('/creategame', function (req, res, next) {
