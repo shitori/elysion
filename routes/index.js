@@ -115,6 +115,17 @@ router.get('/game/:id/finish', function (req, res, next) {
     })
 });
 
+router.get('/game/:id/data', function (req, res, next) {
+    models.getGame(req.params.id, function (game, players) {
+        if (game == -1) {
+            res.redirect("/game")
+        } else {
+            res.json({game: game, players: players});
+        }
+    })
+});
+
+
 
 router.get('/creategame', function (req, res, next) {
     res.render('createGame', {title: 'Nouvelle partie', error: ""});

@@ -1,16 +1,17 @@
 <% include header %>
 
 <p>salut on regarde la game,
-    <%= j1 %> doit faire deviner le mot "<%= mot %>" à
-    <%= j2 %></p>
+    <span id="j1"><%= j1 %></span> doit faire deviner le mot "<span id="word"><%= mot %></span>" à
+    <span id="j2"><%= j2 %></span></p>
 <ul>
     <% for (var i = 0;i < players.length;i++){ %>
         <li> <%= players[i]["name"] %> : <%= players[i]["score"] %> </li>
     <% } %>
 </ul>
 
-<script src="/javascripts/reload.js"></script>
+<input type="hidden" id="id_game" value="<%= game["id"] %>">
 
-<% include footer %>
+
+<% include footer_show %>
 
 
