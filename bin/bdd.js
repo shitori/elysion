@@ -1,9 +1,9 @@
 let mysql = require('mysql');
 let connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'elysion',
+    host: 'mysql-sunland.alwaysdata.net',
+    user: 'sunland',
+    password: 'Metallica7793290',
+    database: 'sunland_elysion',
     insecureAuth : true,
 });
 
