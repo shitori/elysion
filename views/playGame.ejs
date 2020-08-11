@@ -21,7 +21,7 @@
                 history[i]["j2"] = players[j]["name"]
             }
         } %>
-        <% if (history[i]["success"] == 1){ %>
+        <% if (history[i]["isSuccess"] == 1){ %>
             <li> <%= history[i]["j1"] %> a reussi a faire deviner le mot <%= history[i]["actualword"] %>
                 à <%= history[i]["j2"] %></li>
         <% } else{ %>
