@@ -7,6 +7,11 @@ router.get('/', function (req, res, next) {
     res.render('index', {title: 'Accueil'});
 });
 
+router.post('/', function (req, res, next) {
+    res.redirect("/game/"+req.body.id+"/show")
+});
+
+
 router.get('/game', function (req, res, next) {
     res.render('game', {title: 'Rejoindre une partie'});
 });

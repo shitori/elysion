@@ -1,7 +1,47 @@
 <% include header %>
-<body>
-<h1><%= title %></h1>
-<p>Welcome to <%= title %> salut a tous</p>
-</body>
+
+<div class="mt-5 container bg-dark rounded text-center text-light">
+    <h1 class="text-warning">BIENVENUE AU JEU DU MOT DE PASSE</h1>
+    <div class="row">
+        <div class="col-sm">
+            <h2 class="text-info">Règles du jeu</h2>
+        </div>
+        <div class="col-sm">
+            <h2>Fonctionnement de l'application</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm text-left p-3 border border-info rounded-lg">
+            <h5><span class="text-info">-</span> Les règles du jeu sont simples.</h5>
+            <h5><span class="text-info">-</span> La partie est divisée en tours de 90 secondes.</h5>
+            <h5><span class="text-info">-</span> A chaques tours, 2 joueurs sont choisis aléatoirement.</h5>
+            <h5><span class="text-info">-</span> Le premier doit faire deviner un mot au second à l'aide de 3
+                tentatives.</h5>
+            <h5><span class="text-info">-</span> A chaque tentatives ratées, le premier joueur doit cliquer sur
+                <button type="button" class="btn btn-outline-danger">Rater</button>
+                .
+            </h5>
+            <h5><span class="text-info">-</span> Si ils reussisent, le premier joueur doit cliquer sur
+                <button type="button" class="btn btn-outline-success">Valider</button>
+                et les 2 joueurs gagnent un point.
+            </h5>
+            <h5><span class="text-info">-</span> Si ils échouent après 3 tentatives ratées ou au temps impartie, aucun
+                des 2 joueurs ne gagnent de
+                point.</h5>
+            <h5><span class="text-info">-</span> Dans les 2 cas, la partie passe au tour suivant jusqu'à l'un des
+                joueurs cliquer sur
+                <button type="button" class="btn btn-outline-light">Fin de partie</button>
+                .
+            </h5>
+
+        </div>
+        <div class="col-sm">
+            <h4>Fonctionnement de l'application</h4>
+        </div>
+    </div>
+
+
+</div>
+
 
 <% include footer %>

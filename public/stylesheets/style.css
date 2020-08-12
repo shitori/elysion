@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemonada:wght@700&display=swap');
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+  font-family: 'Lemonada', cursive;
 }
 
 a {
