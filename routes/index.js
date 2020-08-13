@@ -8,7 +8,19 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    res.redirect("/game/"+req.body.id+"/show")
+    res.redirect("/game/" + req.body.id + "/show")
+});
+
+router.get('/allcurrentgame', function (req, res, next) {
+    models.allCurrentGame(function (games, players) {
+        res.render('allCurrentGame', {title: 'Toutes les parties en cours', games: games, players: players});
+    })
+});
+
+router.get('/allfinishgame', function (req, res, next) {
+    models.allFinishGame(function (games, players) {
+        res.render('allFinishGame', {title: 'Toutes les parties finies', games: games, players: players});
+    })
 });
 
 

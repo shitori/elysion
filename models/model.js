@@ -137,6 +137,30 @@ class Model {
             cb("ok")
         })
     }
+
+    static allCurrentGame(cb) {
+        connection.query("select * from game g where isOver = 0", (err, rows) => {
+            if (err) throw err
+            connection.query("select * from player where id_game in (select id from game where isOver = 0) order by score desc ", (err, rows2) => {
+                if (err) throw err
+                cb(rows, rows2)
+            })
+
+        })
+    }
+
+    static allFinishGame(cb){
+        connection.query("select * from game g where isOver = 1", (err, rows) => {
+            if (err) throw err
+            connection.query("select * from player where id_game in (select id from game where isOver = 1) order by score desc ", (err, rows2) => {
+                if (err) throw err
+                cb(rows, rows2)
+            })
+
+        })
+    }
+
+
 }
 
 module.exports = Model
