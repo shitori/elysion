@@ -1,11 +1,54 @@
 <% include header %>
 
-<p>salut la partie est fini</p>
-<ul>
-    <% for (var i = 0;i < players.length;i++){ %>
-        <li> <%= players[i]["name"] %> : <%= players[i]["score"] %> </li>
-    <% } %>
-</ul>
+<div class="mt-5 container bg-dark rounded text-center text-light">
+
+    <h1>Partie n°<%= game["id"] %></h1>
+    <h2>Résultats:</h2>
+    <ul class="list-group list-group-flush">
+        <% for (var i = 0;i < players.length;i++){ %>
+            <% if (i < players.length / 3){ %>
+                <li class="list-group-item bg-dark text-success h3"> <%= i + 1 %>e: <%= players[i]["name"] %>
+                    avec un score de <%= players[i]["score"] %> </li>
+            <% } else if(i < players.length * 2 / 3){ %>
+                <li class="list-group-item bg-dark text-warning h3"> <%= i + 1 %>e: <%= players[i]["name"] %>
+                    avec un score de <%= players[i]["score"] %> </li>
+            <% } else { %>
+                <li class="list-group-item bg-dark text-danger h3"> <%= i + 1 %>e: <%= players[i]["name"] %>
+                    avec un score de <%= players[i]["score"] %>  </li>
+            <% } %>
+        <% } console.log(history) %>
+    </ul>
+    <h3>Historique:</h3>
+    <div class="row mx-auto ">
+        <% for (var i = 0;i < history.length;i++){ %>
+
+            <% for (var j = 0; j < players.length; j++) {
+                if (history[i]["p1"] == players[j]["id"]) {
+                    history[i]["j1"] = players[j]["name"]
+                }
+                if (history[i]["p2"] == players[j]["id"]) {
+                    history[i]["j2"] = players[j]["name"]
+                }
+            } %>
+            <% if (history[i]["isSuccess"] == 1){ %>
+                <div class="card bg-dark m-4 border border-success" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= history[i]["j1"] %> → <%= history[i]["j2"] %> </h5>
+                        <h4 class="card-text"><%= history[i]["actualword"]%></h4>
+                    </div>
+                </div>
+            <% } else{ %>
+                <div class="card bg-dark m-4 border border-danger" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= history[i]["j1"] %> → <%= history[i]["j2"] %> </h5>
+                        <h4 class="card-text"><%= history[i]["actualword"]%></h4>
+                    </div>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+
+</div>
 
 
 <% include footer %>

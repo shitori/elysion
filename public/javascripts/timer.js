@@ -2,6 +2,8 @@ var timer = 90
 var s = timer;
 var rater = 3;
 var id_game = $("#id_game").val()
+var j1 = $("#j1").val()
+var j2 = $("#j2").val()
 console.log(id_game)
 
 $("#timer").text(s);
@@ -28,3 +30,6 @@ $("#rater").click(function () {
     }
     $("#essai").text(rater);
 });
+
+odoo.default({ el:'.js-odoo1', from: 'FKSHRPGHNSHAPVNSGF', to: j1, animationDelay: 1000  });
+odoo.default({ el:'.js-odoo2', from: 'FKSHRPGHNSHAPVNSGF', to: j2, animationDelay: 1000  });

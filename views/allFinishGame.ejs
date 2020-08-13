@@ -7,13 +7,15 @@
                 <div class="card-body">
                     <h5 class="card-title">Partie n°<%= games[i]["id"] %></h5>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-warning rounded-lg  text-dark">Liste des joueurs</li>
+                        <li class="list-group-item bg-warning rounded-lg">Liste des joueurs</li>
                         <% for (var j = 0;j < players.length;j++){
                         if (players[j]["id_game"] == games[i]["id"] ){ %>
                             <li class="list-group-item bg-dark"> <%= players[j]["name"] %> : <%= players[j]["score"] %> </li>
                         <% } } %>
                     </ul>
-                    <a href="/game/<%= games[i]["id"] %>/show" class="btn btn-outline-info">Rejoindre</a>
+                    <form action="/game/<%= games[i]["id"] %>/show" method="get">
+                        <button class="btn btn-outline-info">Rejoindre</button>
+                    </form>
                 </div>
             </div>
         <% } %>

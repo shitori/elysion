@@ -1,3 +1,13 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<% include header_error %>
+
+<div class="mt-5 container bg-dark rounded text-center text-light">
+    <h1>Une erreur est survenue ... </h1>
+    <h2><%= error.status %> : <%= message %></h2>
+    <a href="/">
+        <button type="button" class="btn btn-outline-success mt-5 mb-5 pt-5 pb-5 btn-lg btn-block">Revenir au site
+        </button>
+    </a>
+    <pre class="bg-light rounded-lg"><%= error.stack %></pre>
+</div>
+
+<% include footer %>

@@ -131,6 +131,7 @@ router.get('/game/:id/finish', function (req, res, next) {
         } else if (game["isOver"] == 0) {
             res.redirect("/game/" + req.params.id + "/show")
         } else {
+            console.log(history)
             res.render('finishGame', {
                 title: 'Partie Fini',
                 players: players,

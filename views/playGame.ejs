@@ -1,46 +1,85 @@
 <% include header %>
 <input type="hidden" id="id_game" value="<%= game["id"] %>">
+<input type="hidden" id="j1" value="<%= j1 %>">
+<input type="hidden" id="j2" value="<%= j2 %>">
 
-<p>salut on est ds la game,
-    <%= j1 %> doit faire deviner le mot "<%= mot %>" à
-    <%= j2 %> il reste <span id="timer"></span> sec</p>
+<h1 class="text-info text-right">Id :<%= game["id"] %></h1>
+<div class="mt-5 container bg-dark rounded text-center text-light">
+    <div class="row">
+        <h1 class="col text-light js-odoo1"></h1>
+        <h1 class="col text-light js-odoo2"></h1>
+    </div>
 
-<ul>
-    <% for (var i = 0;i < players.length;i++){ %>
-        <li> <%= players[i]["name"] %> : <%= players[i]["score"] %> </li>
-    <% } %>
-</ul>
 
-<ul>
-    <% for (var i = 0;i < history.length;i++){ %>
-        <% for (var j = 0; j < players.length; j++) {
-            if (history[i]["p1"] == players[j]["id"]) {
-                history[i]["j1"] = players[j]["name"]
-            }
-            if (history[i]["p2"] == players[j]["id"]) {
-                history[i]["j2"] = players[j]["name"]
-            }
-        } %>
-        <% if (history[i]["isSuccess"] == 1){ %>
-            <li> <%= history[i]["j1"] %> a reussi a faire deviner le mot <%= history[i]["actualword"] %>
-                à <%= history[i]["j2"] %></li>
-        <% } else{ %>
-            <li> <%= history[i]["j1"] %> n'a pas reussi a faire deviner le mot <%= history[i]["actualword"] %>
-                à <%= history[i]["j2"] %></li>
 
+
+
+    <h1>salut on est ds la game,
+        <%= j1 %> doit faire deviner le mot "<%= mot %>" à
+        <%= j2 %> il reste <span id="timer"></span> sec</h1>
+
+    <div class="row">
+        <form class="col" action="/game/<%= game["id"] %>" method="post">
+            <button class="btn btn-outline-danger btn-lg btn-block " id="rater" name="fail" type="button"><h1>Rater</h1>
+            </button>
+            <span id="essai"></span> essaie(s) restant(s)
+        </form>
+        <form class="col" action="/game/<%= game["id"] %>" method="post">
+            <button class="btn btn-outline-success btn-lg btn-block" name="success" type="submit"><h1>Valider</h1>
+            </button>
+        </form>
+        <form class="col" action="/game/<%= game["id"] %>" method="post">
+            <button class="btn btn-outline-light btn-lg btn-block" name="finish" type="submit"><h1>Finir</h1>
+            </button>
+        </form>
+    </div>
+
+
+    <h2>Résultats:</h2>
+    <ul class="list-group list-group-flush">
+        <% for (var i = 0;i < players.length;i++){ %>
+            <% if (i < players.length / 3){ %>
+                <li class="list-group-item bg-dark text-success h3"> <%= i + 1 %>e: <%= players[i]["name"] %>
+                    avec un score de <%= players[i]["score"] %> </li>
+            <% } else if(i < players.length * 2 / 3){ %>
+                <li class="list-group-item bg-dark text-warning h3"> <%= i + 1 %>e: <%= players[i]["name"] %>
+                    avec un score de <%= players[i]["score"] %> </li>
+            <% } else { %>
+                <li class="list-group-item bg-dark text-danger h3"> <%= i + 1 %>e: <%= players[i]["name"] %>
+                    avec un score de <%= players[i]["score"] %>  </li>
+            <% } %>
+        <% } console.log(history) %>
+    </ul>
+    <h3>Historique:</h3>
+    <div class="row mx-auto ">
+        <% for (var i = 0;i < history.length;i++){ %>
+
+            <% for (var j = 0; j < players.length; j++) {
+                if (history[i]["p1"] == players[j]["id"]) {
+                    history[i]["j1"] = players[j]["name"]
+                }
+                if (history[i]["p2"] == players[j]["id"]) {
+                    history[i]["j2"] = players[j]["name"]
+                }
+            } %>
+            <% if (history[i]["isSuccess"] == 1){ %>
+                <div class="card bg-dark m-4 border border-success" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= history[i]["j1"] %> → <%= history[i]["j2"] %> </h5>
+                        <h4 class="card-text"><%= history[i]["actualword"] %></h4>
+                    </div>
+                </div>
+            <% } else{ %>
+                <div class="card bg-dark m-4 border border-danger" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= history[i]["j1"] %> → <%= history[i]["j2"] %> </h5>
+                        <h4 class="card-text"><%= history[i]["actualword"] %></h4>
+                    </div>
+                </div>
+            <% } %>
         <% } %>
-    <% } %>
-</ul>
+    </div>
 
-
-<form action="/game/<%= game["id"] %>" method="post">
-    <button id="rater" name="fail" type="button">Rater - <span id="essai"></span> essaie(s) restant(s)</button>
-</form>
-<form action="/game/<%= game["id"] %>" method="post">
-    <button name="success" type="submit">Valider</button>
-</form>
-<form action="/game/<%= game["id"] %>" method="post">
-    <button name="finish" type="submit">Fin de partie</button>
-</form>
+</div>
 
 <% include footer_timer.ejs %>

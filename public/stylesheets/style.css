@@ -2,8 +2,20 @@
 body {
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
   font-family: 'Lemonada', cursive;
+  text-shadow: 0 1px 0 #000000,
+  0 2px 0 #000,
+  0 3px 0 #000,
+  0 4px 0 #000,
+  0 5px 0 #000,
+  0 6px 0 transparent,
+  0 7px 0 transparent,
+  0 8px 0 transparent,
+  0 9px 0 transparent,
+  0 10px 10px rgba(0, 0, 0, .4);
 }
 
 a {
   color: #00B7FF;
 }
+
+

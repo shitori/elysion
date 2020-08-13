@@ -1,7 +1,13 @@
 <% include header %>
+<link rel='stylesheet' href='/stylesheets/textacc.css'/>
+
 
 <div class="mt-5 container bg-dark rounded text-center text-light">
-    <h1 class="text-warning">BIENVENUE AU JEU DU MOT DE PASSE</h1>
+    <h1 class="text-warning ">
+        <span>MOT</span>
+        <span>DE</span>
+        <span>PASSE</span>
+    </h1>
     <div class="row">
         <div class="col-sm">
             <h2 class="text-info">Règles du jeu</h2>
@@ -44,16 +50,18 @@
                                                                                       class="text-info">Créer une
                     partie</a>, ajouter le nom des joueurs et le nom de la partie</h5>
             <h5><span class="text-info">-</span> Pour reprendre une partie cliquer sur <a href="/game"
-                                                                                          class="text-info">Rejoindre une
+                                                                                          class="text-info">Rejoindre
+                    une
                     partie</a> et réécrivez le nom de la partie.</h5>
             <h5><span class="text-info">-</span> Pour visualiser la partie en tant qu'invité, aller sur la barre de
                 navigation et entrée y l'id de la partie présent sur la page de la partie.</h5>
-            <button type="button" class="btn btn-outline-warning pt-5 pb-5 btn-lg btn-block">Créer votre partie dès maintenant !</button>
+            <a href="/creategame">
+                <button type="button" class="btn btn-outline-warning pt-5 pb-5 btn-lg btn-block">Créer votre partie dès
+                    maintenant !
+                </button>
+            </a>
         </div>
     </div>
-
-
-
 
 
 </div>
