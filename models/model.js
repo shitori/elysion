@@ -1,4 +1,4 @@
-let connection = require('../bin/bdd');
+let connection = require('../bin/bdd_secret');
 
 let mots = require('../models/mots');
 
@@ -45,7 +45,7 @@ class Model {
     }
 
     static join_game(name, cb) {
-        connection.query("select * from game where name = ? ", [name], (err, row) => {
+        connection.query("select * from game where name = ? ORDER BY RAND()", [name], (err, row) => {
             if (err) throw err
             if (row.length > 0) {
                 cb(row[0]["id"])
@@ -58,15 +58,10 @@ class Model {
     static setGame(id, cb) {
         connection.query("select * from player where id_game = ?", [id], (err, rows) => {
             if (err) throw err
-            var luck = 1.5;
             do {
                 var rj1 = Math.floor(Math.random() * rows.length);
                 var rj2 = Math.floor(Math.random() * rows.length);
-                while (rj1 == rj2) {
-                    rj1 = Math.floor(Math.random() * rows.length);
-                    rj2 = Math.floor(Math.random() * rows.length);
-                }
-            } while (rows[rj1]["score"] < rows[rows.length - 1]["score"] * luck && rows[rj2]["score"] < rows[rows.length - 1]["score"] * luck)
+            } while (rj1 == rj2)
             var r = Math.floor(Math.random() * mots.length);
             connection.query("update game set actualword = ? , p1 = ? , p2 = ? where id = ?", [mots[r], rows[rj1]["id"], rows[rj2]["id"], id], (err) => {
                 if (err) throw err
