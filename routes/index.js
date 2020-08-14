@@ -64,7 +64,6 @@ router.get('/game/:id', function (req, res, next) {
 router.post('/game/:id', function (req, res, next) {
     if (req.body.finish == undefined) {
         if (req.body.success == undefined) {
-            console.log("loose")
             models.addLoose(req.params.id, function (status) {
                 res.redirect("/game/" + req.params.id)
             })
@@ -131,7 +130,6 @@ router.get('/game/:id/finish', function (req, res, next) {
         } else if (game["isOver"] == 0) {
             res.redirect("/game/" + req.params.id + "/show")
         } else {
-            console.log(history)
             res.render('finishGame', {
                 title: 'Partie Fini',
                 players: players,

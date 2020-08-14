@@ -29,7 +29,6 @@ class Model {
                             } else {
                                 sql += "(default,?,default," + r + "),"
                             }
-                            console.log(sql)
                         }
                         connection.query(sql, players, (err) => {
                             if (err) throw err
@@ -57,14 +56,17 @@ class Model {
     }
 
     static setGame(id, cb) {
-
         connection.query("select * from player where id_game = ?", [id], (err, rows) => {
             if (err) throw err
             var luck = 1.5;
             do {
                 var rj1 = Math.floor(Math.random() * rows.length);
                 var rj2 = Math.floor(Math.random() * rows.length);
-            } while (rj1 == rj2 && rows[rj1]["score"] < rows[rows.length - 1]["score"] * luck && rows[rj2]["score"] < rows[rows.length - 1]["score"] * luck)
+                while (rj1 == rj2) {
+                    rj1 = Math.floor(Math.random() * rows.length);
+                    rj2 = Math.floor(Math.random() * rows.length);
+                }
+            } while (rows[rj1]["score"] < rows[rows.length - 1]["score"] * luck && rows[rj2]["score"] < rows[rows.length - 1]["score"] * luck)
             var r = Math.floor(Math.random() * mots.length);
             connection.query("update game set actualword = ? , p1 = ? , p2 = ? where id = ?", [mots[r], rows[rj1]["id"], rows[rj2]["id"], id], (err) => {
                 if (err) throw err
@@ -149,7 +151,7 @@ class Model {
         })
     }
 
-    static allFinishGame(cb){
+    static allFinishGame(cb) {
         connection.query("select * from game g where isOver = 1", (err, rows) => {
             if (err) throw err
             connection.query("select * from player where id_game in (select id from game where isOver = 1) order by score desc ", (err, rows2) => {

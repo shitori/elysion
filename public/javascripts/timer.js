@@ -4,7 +4,6 @@ var rater = 3;
 var id_game = $("#id_game").val()
 var j1 = $("#j1").val()
 var j2 = $("#j2").val()
-console.log(id_game)
 
 $("#timer").text(s);
 $("#essai").text(rater);
@@ -18,7 +17,7 @@ $(function () {
     setInterval(timer, 1000);
 });
 setTimeout(function () {
-    $.post("http://localhost:3000/game/" + id_game);
+    $.post("/game/" + id_game);
 
     window.location.reload(1);
 }, timer * 1000);

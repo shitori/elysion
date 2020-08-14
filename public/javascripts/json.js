@@ -3,7 +3,7 @@ window.setInterval(function () {
     $.ajax({
         type: 'GET',
         contentType: 'application/json',
-        url: 'http://localhost:3000/game/' + id_game + '/data',
+        url: '/game/' + id_game + '/data',
         success: function (data) {
             var players = "";
             var history = "";
