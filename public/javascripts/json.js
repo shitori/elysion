@@ -8,13 +8,24 @@ window.setInterval(function () {
             var players = "";
             var history = "";
             for (i in data.players) {
-                if (data.players[i].id == data.game.p1){
+                if (data.players[i].id == data.game.p1) {
                     var j1 = data.players[i].name
                 }
-                if (data.players[i].id == data.game.p2){
+                if (data.players[i].id == data.game.p2) {
                     var j2 = data.players[i].name
                 }
-                players += "<li>" + data.players[i].name + " : " + data.players[i].score + " </li>";
+                //players += "<li>" + data.players[i].name + " : " + data.players[i].score + " </li>";
+                var k = i;
+                k++;
+                if (i < data.players.length / 3) {
+                    players += "<li class=\"list-group-item bg-dark text-success h3\">" + k + "e: " + data.players[i].name + " avec un score de " + data.players[i].score + "</li>"
+
+                } else if (i < data.players.length * 2 / 3) {
+                    players += "<li class=\"list-group-item bg-dark text-warning h3\">" + k + "e: " + data.players[i].name + " avec un score de " + data.players[i].score + "</li>"
+
+                } else {
+                    players += "<li class=\"list-group-item bg-dark text-danger h3\">" + k + "e: " + data.players[i].name + " avec un score de " + data.players[i].score + "</li>"
+                }
             }
             for (i in data.history) {
                 for (j in data.players) {
@@ -25,24 +36,28 @@ window.setInterval(function () {
                         data.history[i].j2 = data.players[j].name
                     }
                 }
-                console.log(data.history[i])
-                console.log(data.history[i].isSuccess.data[0])
+                /*console.log(data.history[i])
+                console.log(data.history[i].isSuccess.data[0])*/
                 if (data.history[i].isSuccess.data[0] == 49) {
-                    history += "<li>" +
+                    history +=
+                        "<div class=\"card bg-dark m-4 border border-success\" style=\"width: 18rem;\">" +
+                        "<div class=\"card-body\"><h5 class=\"card-title\">" +
                         data.history[i].j1 +
-                        " a reussi a faire deviner le mot " +
-                        data.history[i].actualword +
-                        " à " +
-                        data.history[i].j2 +
-                        "</li>"
+                        " → "
+                        + data.history[i].j2 +
+                        "</h5><h4 class=\"card-text\">"
+                        + data.history[i].actualword +
+                        "</h4></div></div>"
                 } else {
-                    history += "<li>" +
+                    history +=
+                        "<div class=\"card bg-dark m-4 border border-danger\" style=\"width: 18rem;\">" +
+                        "<div class=\"card-body\"><h5 class=\"card-title\">" +
                         data.history[i].j1 +
-                        " n'a pas reussi a faire deviner le mot " +
-                        data.history[i].actualword +
-                        " à " +
-                        data.history[i].j2 +
-                        "</li>"
+                        " → "
+                        + data.history[i].j2 +
+                        "</h5><h4 class=\"card-text\">"
+                        + data.history[i].actualword +
+                        "</h4></div></div>"
                 }
             }
             $("#j1").text(j1)
