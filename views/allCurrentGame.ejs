@@ -5,12 +5,13 @@
         <% for (var i = 0;i < games.length;i++){ %>
             <div class="card bg-dark m-2 rounded-lg border-info" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Partie n°<%= games[i]["id"] %></h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-warning rounded-lg ">Liste des joueurs</li>
+                    <h4 class="card-title">Partie n°<%= games[i]["id"] %></h4>
+                    <ul class="list-group lst-group-flush">
+                        <li class="list-group-item bg-dark border-bottom rounded-lg ">Liste des joueurs</li>
                         <% for (var j = 0;j < players.length;j++){
                         if (players[j]["id_game"] == games[i]["id"] ){ %>
-                            <li class="list-group-item bg-dark"> <%= players[j]["name"] %> : <%= players[j]["score"] %> </li>
+                            <li class="list-group-item  bg-dark"> <%= players[j]["name"] %>
+                                : <%= players[j]["score"] %> </li>
                         <% } } %>
                     </ul>
                     <a href="/game/<%= games[i]["id"] %>/show" class="btn btn-outline-info">Rejoindre</a>
