@@ -1,5 +1,0 @@
-   install dependencies:
-     > npm install
-
-   run the app:
-     > SET DEBUG=elysion:* & npm start
