@@ -2,6 +2,7 @@
 <input type="hidden" id="id_game" value="<%= game["id"] %>">
 <input type="hidden" id="j1" value="<%= j1 %>">
 <input type="hidden" id="j2" value="<%= j2 %>">
+<input type="hidden" id="mot" value="<%= mot %>">
 <h1 class="text-info text-right">Id :<%= game["id"] %></h1>
 
 <div class="mt-5 container-fluid bg-dark rounded text-center text-light">
@@ -11,8 +12,8 @@
         <h1 class="col-sm" id="j2" style="font-size: 100px"><%= j2 %></h1>
     </div>
 
-    <h1 class="text-info" style="font-size: 100px">
-        <%= mot %>
+    <h1 class="text-info" style="font-size: 100px" id="word">
+        Clique ici pour voir le mot !
     </h1>
     <h1><span id="timer"></span></h1>
 
